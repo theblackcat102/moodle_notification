@@ -1,11 +1,5 @@
 # NCTU new E3 Moddle bot 
 
-## Rant, recommend you skip this
-
-```
-交大舊版 e3 可以在首頁看到什麼作業還沒繳（新版因為比較遲公布，我的論文研討就這樣缺席了一次QAQ）、通知全部（沒錯全部）都會寄送到我的信箱，沒有任何遺漏。
-```
-
 ## Background
 
 For the record I am in no way a meticulous student at all, previously my university old online course platform has a lot of neat features that reminds me of due homework, robust mailing system (ensures I don't miss any annoucement), mail notify whenever I submit an assigment. These little details are the result of years and years of polishing our university in house platform which came into an end when the administration decided to move to [Moodle](https://en.wikipedia.org/wiki/Moodle). Which is a pretty looking platform that can't get things done.
