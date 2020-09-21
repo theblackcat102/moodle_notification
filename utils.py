@@ -42,6 +42,13 @@ def call(token, fname, **kwargs):
     response = requests.post(SERVER_API_ENDPOINT, parameters)
     response = response.json()
     if type(response) == dict and response.get('exception'):
+        '''
+            {
+                'exception': 'moodle_exception', 
+                'errorcode': 'invalidtoken', 
+                'message': '無效的通行憑證 -- 找不到通行憑證'
+            }
+        '''
         raise SystemError("Error calling Moodle API\n", response)
     return response
 

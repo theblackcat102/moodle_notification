@@ -27,8 +27,22 @@ class ModdleAPI():
                 json.dump(user_details, f)
                 self.user_details = user_details
 
+    def refresh_auth_token(self):
+        cache_path = os.path.join(CACHE_PATH, 'user.json')
+        token = ModdleAPI.login(username, password)
+        user_details = call(token, 'core_webservice_get_site_info')
+        user_details['token'] = token
+        with open(cache_path, 'w') as f:
+            json.dump(user_details, f)
+            self.user_details = user_details
+
+
     def get_all_courses(self):
-        enrolled_courses = call(self.user_details['token'], 'core_enrol_get_users_courses', userid=self.user_details['userid'])
+        try:
+            enrolled_courses = call(self.user_details['token'], 'core_enrol_get_users_courses', userid=self.user_details['userid'])
+        except SystemError:
+            # try refresh login token
+            self.refresh_auth_token()
         self.enrolled_courses = enrolled_courses
         return self.enrolled_courses
 
@@ -45,7 +59,12 @@ class ModdleAPI():
 
     def get_course_announcement(self, course):
         # returns a list
-        course_annoncements = call(self.user_details['token'], 'core_course_get_contents', courseid=course['id'])
+        try:
+            course_annoncements = call(self.user_details['token'], 'core_course_get_contents', courseid=course['id'])
+        except SystemError:
+            # try refresh login token
+            self.refresh_auth_token()
+
         course_annoncement_modules = []
         for course_a in course_annoncements:
             course_annoncement_modules += course_a['modules']
