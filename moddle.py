@@ -16,6 +16,8 @@ class ModdleAPI():
         self.enrolled_courses = []
         self.valid_courses = []
         cache_path = os.path.join(CACHE_PATH, 'user.json')
+        self.username = username
+        self.password = password
         if os.path.exists(cache_path):
             with open(cache_path, 'r') as f:
                 self.user_details = json.load(f)
@@ -29,7 +31,7 @@ class ModdleAPI():
 
     def refresh_auth_token(self):
         cache_path = os.path.join(CACHE_PATH, 'user.json')
-        token = ModdleAPI.login(username, password)
+        token = ModdleAPI.login(self.username, self.password)
         user_details = call(token, 'core_webservice_get_site_info')
         user_details['token'] = token
         with open(cache_path, 'w') as f:
@@ -43,6 +45,7 @@ class ModdleAPI():
         except SystemError:
             # try refresh login token
             self.refresh_auth_token()
+            enrolled_courses = call(self.user_details['token'], 'core_enrol_get_users_courses', userid=self.user_details['userid'])
         self.enrolled_courses = enrolled_courses
         return self.enrolled_courses
 

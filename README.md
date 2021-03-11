@@ -1,12 +1,14 @@
-# NCTU Moodle telegram bot 
+# NYCU Moodle telegram bot 
 
+陽明交大課程系統的 telegram 通知機器人
 
+技術門檻高，小心謹慎使用
 
 # Setup
 
-If your moodle domain is e3new.nctu.edu then start at step 1, otherwise start at step 0
+If your moodle domain is e3.nycu.edu then start at step 1, otherwise start at step 0
 
-0. Change the *e3new.nctu.edu.tw* inside const.py to your school moodle domain
+0. Change the *e3.nycu.edu.tw* inside const.py to your school moodle domain
 
 You may need to check whether rest server endpoint is enabled.
 
@@ -21,8 +23,8 @@ You can obtain userid by executing get_received_msg() inside telegram.py
 ```
 TELEGRAM_API_KEY='telegram bot token'
 TELEGRAM_USER_KEY='your user id'
-E3_USERNAME='NCTU e3 username'
-E3_PASSWORD='NCTU e3 password'
+E3_USERNAME='NYCU e3 username'
+E3_PASSWORD='NYCU e3 password'
 ```
 
 3. Setup your python environment by installing the required package inside requirements.txt and run the following script in sequence
